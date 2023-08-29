@@ -12,6 +12,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var usePrepend *bool
+
 // useCmd represents the use command
 var useCmd = &cobra.Command{
 	Use:   "use",
@@ -37,11 +39,11 @@ all found packages.`,
 					logrus.Warn(err)
 					continue
 				}
-				path = v.AddToPath(path)
+				path = v.AddToPath(path, *usePrepend)
 			}
 		} else {
 			for _, p := range repo.Packages {
-				path = p.Versions.Latest().AddToPath(path)
+				path = p.Versions.Latest().AddToPath(path, *usePrepend)
 			}
 		}
 
@@ -61,4 +63,6 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// useCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	usePrepend = useCmd.Flags().BoolP("prepend", "p", false, "Insert in beginning of path instead of at the end")
 }

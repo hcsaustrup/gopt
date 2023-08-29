@@ -22,7 +22,9 @@ gopt list kubectl
 Add package to PATH (use):
 
 ```bash
-# Syntax: goptuse {package{:version}} {package{:version}}
+# Syntax: goptuse {-p} {package{:version}} {package{:version}}
 # Example:
 goptuse kubectl:1.2.3 terraform:2.3.4 terragrunt
 ```
+
+By default, package paths will be *appended* to `PATH`. Add `-p` to *prepend* instead.

@@ -35,10 +35,8 @@ type Version struct {
 	Package       *Package
 }
 
-func (v *Version) AddToPath(path string) string {
-	pathElements := []string{
-		v.Path,
-	}
+func (v *Version) AddToPath(path string, prepend bool) string {
+	pathElements := []string{}
 
 	for _, pathElement := range strings.Split(path, ":") {
 		prefix := fmt.Sprintf("%s%c", v.Package.Path, os.PathSeparator)
@@ -46,6 +44,12 @@ func (v *Version) AddToPath(path string) string {
 			continue
 		}
 		pathElements = append(pathElements, pathElement)
+	}
+
+	if prepend {
+		pathElements = append([]string{v.Path}, pathElements...)
+	} else {
+		pathElements = append(pathElements, v.Path)
 	}
 
 	return strings.Join(pathElements, ":")

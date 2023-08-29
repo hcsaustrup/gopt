@@ -14,7 +14,7 @@ bin/gopt-compressed: bin/gopt
 	upx -t $@
 
 install: bin/gopt-compressed
-	test -e ~/common/bin && install -v $< ~/common/bin/ || install -v $< ~/bin
+	test -e ~/common/bin && install -v $< ~/common/bin/gopt || install -v $< ~/bin/gopt
 
 clean:
 	rm -rf bin
