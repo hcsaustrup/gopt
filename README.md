@@ -1,5 +1,11 @@
 # The Go OPTional Package Helper
 
+## Install
+
+```bash
+$ make clean install
+```
+
 ## Usage
 
 ### Bash helper
