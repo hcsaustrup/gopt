@@ -85,7 +85,6 @@ $ which terraform
 
 # Now pick another one:
 $ goptuse terraform:1.3.7
-Terraform v1.5.5
 
 # Verify that the new version is in the path:
 $ which terraform
