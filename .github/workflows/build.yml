@@ -15,3 +15,9 @@ jobs:
 
       - name: Build
         run: make dist
+
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: gopt
+          path: dist/*

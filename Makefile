@@ -1,23 +1,26 @@
+BINARY=gopt
+.PRECIOUS: bin/${BINARY} dist/${BINARY}
 
-all: bin/gopt
+all: bin/${BINARY}
 
-bin/gopt:
+bin/${BINARY}:
 	go get
 	go mod tidy
 	mkdir -p bin
 	go build -o $@
 
-dist: bin/gopt-compressed
+dist: dist/${BINARY}
 
-bin/gopt-compressed: bin/gopt
+dist/gopt: bin/${BINARY}
+	mkdir -p dist
 	cp -av $< $@
 	strip $@
 	upx -9 $@
 	upx -t $@
 
-install: bin/gopt-compressed
-	test -e ~/common/bin && install -v $< ~/common/bin/gopt || install -v $< ~/bin/gopt
+install: dist/gopt
+	test -e ~/common/bin && install -v $< ~/common/bin/${BINARY} || install -v $< ~/bin/${BINARY}
 
 clean:
-	rm -rf bin
+	rm -rf bin dist
 
