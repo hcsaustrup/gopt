@@ -16,8 +16,12 @@ jobs:
       - name: Build
         run: make dist
 
-      - name: Upload
-        uses: actions/upload-artifact@v3
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: gopt
-          path: dist/*
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./dist/gopt
+          asset_name: gopt
+          asset_content_type: application/octet-stream
