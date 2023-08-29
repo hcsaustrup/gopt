@@ -1,6 +1,12 @@
 name: Go package
 
-on: [release]
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: write
+  packages: write
 
 jobs:
   build:
