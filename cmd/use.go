@@ -36,7 +36,7 @@ all found packages.`,
 			for _, arg := range args {
 				v, err := repo.FindPackageVersion(arg)
 				if err != nil {
-					logrus.Warn(err)
+					logrus.Error(err)
 					continue
 				}
 				path = v.AddToPath(path, *usePrepend)
@@ -47,6 +47,7 @@ all found packages.`,
 			}
 		}
 
+		fmt.Println("\n# This should be eval'ed by the shell:")
 		fmt.Printf("export PATH=\"%s\"\n", path)
 	},
 }

@@ -6,19 +6,32 @@ package cmd
 import (
 	"os"
 
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
+
+var debugEnabled bool
+var infoEnabled bool
+var traceEnabled bool
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "gopt",
-	Short: "GoOPTional Package Helper",
+	Short: "Go OPTional Package Helper",
 	Long: `This tool looks for software packages in $GOPT_PACKAGES, organized in name/semantic-version
 folders. It can list the versions available and manipulate the PATH.`,
 
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		if traceEnabled {
+			logrus.SetLevel(logrus.TraceLevel)
+		} else if debugEnabled {
+			logrus.SetLevel(logrus.DebugLevel)
+		} else if infoEnabled {
+			logrus.SetLevel(logrus.InfoLevel)
+		} else {
+			logrus.SetLevel(logrus.ErrorLevel)
+		}
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -36,6 +49,9 @@ func init() {
 	// will be global for your application.
 
 	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.gopt.yaml)")
+	rootCmd.PersistentFlags().BoolVarP(&debugEnabled, "debug", "", false, "Set log level to 'debug'")
+	rootCmd.PersistentFlags().BoolVarP(&traceEnabled, "trace", "", false, "Set log level to 'trace'")
+	rootCmd.PersistentFlags().BoolVarP(&infoEnabled, "info", "", false, "Set log level to 'info'")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
