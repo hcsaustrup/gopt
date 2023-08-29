@@ -1,5 +1,7 @@
 # Usage
 
+## Bash helper
+
 Add to `~/.bashrc`:
 
 ```bash
@@ -11,15 +13,17 @@ function goptuse() {
 }
 ```
 
-List packages:
+## List packages
 
 ```bash
-# Syntax: gopt list {package} {package..}
+# Syntax: gopt list {-t} {package} {package..}
 # Example:
 gopt list kubectl
 ```
 
-Add package to PATH (use):
+Add `-t` for pretty table formatting.
+
+## Add package to PATH (use)
 
 ```bash
 # Syntax: goptuse {-p} {package{:version}} {package{:version}}
