@@ -20,14 +20,48 @@ jobs:
           go-version: "1.19"
 
       - name: Build
-        run: make dist
+        run: |
+          GOOS=linux GOARCH=amd64 make dist
+          GOOS=linux GOARCH=arm64 make dist
+          GOOS=darwin GOARCH=amd64 make dist
+          GOOS=darwin GOARCH=arm64 make dist
 
-      - name: Upload Release Asset
+      - name: upload linux-amd64
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./dist/gopt
-          asset_name: gopt
+          asset_path: ./dist/gopt-linux-amd64
+          asset_name: gopt-linux-amd64
+          asset_content_type: application/octet-stream
+
+      - name: upload linux-arm64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./dist/gopt-linux-arm64
+          asset_name: gopt-linux-arm64
+          asset_content_type: application/octet-stream
+
+      - name: upload darwin-amd64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./dist/gopt-darwin-amd64
+          asset_name: gopt-darwin-amd64
+          asset_content_type: application/octet-stream
+
+      - name: upload darwin-arm64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./dist/gopt-darwin-arm64
+          asset_name: gopt-darwin-arm64
           asset_content_type: application/octet-stream
