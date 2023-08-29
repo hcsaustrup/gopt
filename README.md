@@ -4,15 +4,9 @@
 
 Assuming you have a bunch of tools organized in `package/version` style directories, this tool will help you list and pick specific versions for your current shell session. This will NOT affect the system wide `PATH` but only the shell you run it in. This is by design.
 
-## Install
-
-Currently there aren't any precompiled packages available, so you need to roll your own:
-
-```bash
-$ make clean install
-```
-
 ## Usage
+
+Download the binary for your system, rename it to `gopt` and drop it in your `bin` folder.
 
 ### Bash helper
 
