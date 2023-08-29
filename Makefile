@@ -7,6 +7,8 @@ bin/gopt:
 	mkdir -p bin
 	go build -o $@
 
+dist: bin/gopt-compressed
+
 bin/gopt-compressed: bin/gopt
 	cp -av $< $@
 	strip $@
