@@ -17,8 +17,8 @@ var usePrepend *bool
 // useCmd represents the use command
 var useCmd = &cobra.Command{
 	Use:   "use",
-	Short: "Build and output PATH statement that includes the selected versions",
-	Long: `Build and output PATH statement suitable for evaluation by a BASH
+	Short: "Build and output PATH that includes the selected versions",
+	Long: `Build and output PATH suitable for evaluation by a BASH
 compatible shell.
 
 Specify as many packages to include in the format "package:version". Omitting ":version"
@@ -47,8 +47,7 @@ all found packages.`,
 			}
 		}
 
-		fmt.Println("\n# This should be eval'ed by the shell:")
-		fmt.Printf("export PATH=\"%s\"\n", path)
+		fmt.Println(path)
 	},
 }
 

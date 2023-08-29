@@ -24,7 +24,7 @@ func NewRepository(path string) (*Repository, error) {
 		Packages:   Packages{},
 	}
 
-	logrus.Infof("Looking for packages in %s", r.Path)
+	logrus.Debugf("Looking for packages in %s", r.Path)
 	packageFiles, err := os.ReadDir(r.Path)
 	if err != nil {
 		return nil, err
@@ -42,7 +42,7 @@ func NewRepository(path string) (*Repository, error) {
 			Versions:   Versions{},
 		}
 
-		logrus.Infof("Looking for versions in %s", p.Path)
+		logrus.Debugf("Looking for versions in %s", p.Path)
 		versionFiles, err := os.ReadDir(p.Path)
 		if err != nil {
 			return nil, err

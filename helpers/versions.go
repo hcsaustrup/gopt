@@ -42,7 +42,7 @@ func (v *Version) AddToPath(path string, prepend bool) string {
 	for _, pathElement := range strings.Split(path, ":") {
 		prefix := fmt.Sprintf("%s%c", v.Package.Path, os.PathSeparator)
 		if strings.HasPrefix(pathElement, prefix) && pathElement != v.Path {
-			logrus.Debugf("Removing PATH element: %s", pathElement)
+			logrus.Infof("Removing PATH element: %s", pathElement)
 			continue
 		}
 		pathElements = append(pathElements, pathElement)
